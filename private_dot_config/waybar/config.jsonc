@@ -18,9 +18,10 @@
     "modules-right": [
         "mpd",
         "idle_inhibitor",
+        "power-profiles-daemon",
         "pulseaudio",
         "network",
-        "power-profiles-daemon",
+	"bluetooth",
         "cpu",
         "memory",
         "temperature",
@@ -158,11 +159,11 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{signalStrength}% ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-disconnected": "Dscnt ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
