@@ -112,9 +112,10 @@ output * bg /home/lzcoder/.background fill
     
     # Take screenshots
     bindsym Print exec $screenshooter --notify save output
-    bindsym $mod+Print exec $grimshot --notify save active
-    bindsym Shift+Print exec $grimshot --notify save area
-    bindsym Control+Print exec $grimshot --notify save screen
+    bindsym $mod+Print exec $screenshooter --notify save active
+    bindsym Shift+Print exec $screenshooter --notify save area
+    bindsym Control+Print exec $screenshooter --notify save screen
+
 #
 # Moving around:
 #
