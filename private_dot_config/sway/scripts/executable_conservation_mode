@@ -1,0 +1,31 @@
+#!/bin/bash
+
+function toggle() {
+  echo $1 | sudo tee /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode >> /dev/null
+}
+#t=$(cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode)
+
+status=$(cat /sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode)
+case $1 in
+  'toggle')
+    if [ $status -eq 0 ]; then
+      toggle "1"
+      class="on"
+    elif [ $status -eq 1 ]; then
+      toggle "0"
+      class="off"
+    fi
+    ;;
+  'check')
+    if [ $status -eq 0 ]; then
+      class="off"
+    elif [ $status -eq 1 ]; then
+      class="on"
+    fi
+    ;;
+esac
+
+tooltip="Conservation: $class"
+
+printf '{"alt":"%s","tooltip":"%s","class":"%s"}\n' "$class" "$tooltip" "$class"
+

@@ -19,6 +19,8 @@ set $term foot
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu killall rofi || rofi -terminal 'foot' -show drun -show-icons | xargs swaymsg exec --
+set $rofi_power_menu /home/lzcoder/.local/bin/rofi-power-menu
+set $logout_menu killall rofi || rofi -show power-menu -modi power-menu:$rofi_power_menu -font "Monospace 16" -theme-str 'window {width: 12em;} listview {lines: 6;}' | xargs swaymsg exec --
 set $screenshooter /usr/share/sway-contrib/grimshot
 
 ### General Configs
@@ -75,9 +77,10 @@ output * bg /home/lzcoder/.background fill
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym Shift+$mod+Return exec $term --app-id=foot-float
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+d exec $menu
@@ -97,6 +100,9 @@ output * bg /home/lzcoder/.background fill
 #
 # Custom:
 #
+    # Start logout menu
+    bindsym Control+Alt+Delete exec $logout_menu
+
     # Color picker
     bindsym $mod+Shift+p exec grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4 | wl-copy -n
 
@@ -116,6 +122,11 @@ output * bg /home/lzcoder/.background fill
     bindsym Shift+Print exec $screenshooter --notify save area
     bindsym Control+Print exec $screenshooter --notify save screen
 
+    # Control Playctl
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioStop exec playerctl stop
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
 #
 # Moving around:
 #
