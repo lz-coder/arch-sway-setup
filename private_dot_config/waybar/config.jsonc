@@ -10,15 +10,14 @@
         "sway/workspaces",
         "sway/mode",
         "sway/scratchpad",
-        "custom/media"
+        "custom/ideapad",
+        "idle_inhibitor",
+        "power-profiles-daemon"
     ],
     "modules-center": [
         "sway/window"
     ],
     "modules-right": [
-        "mpd",
-        "idle_inhibitor",
-        "power-profiles-daemon",
         "pulseaudio",
         "network",
 	"bluetooth",
@@ -163,7 +162,7 @@
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Dscnt ⚠",
+        "format-disconnected": "Dsc ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
@@ -196,5 +195,31 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "mpris": {
+	"format": "{player_icon} {title}",
+        "title-len": 22,
+	"format-paused": "{status_icon} {title}",
+	"player-icons": {
+		"spotify": "",
+                "default": "🎜",
+                "firefox": "",
+                "chromium": ""
+	},
+	"status-icons": {
+                "playing": "▶",
+		"paused": "⏸",
+                "stopped": ""
+	},
+	// "ignored-players": ["firefox"]
+    },
+    "custom/ideapad": {
+        "interval": "once",
+        "tooltip": true,
+        "return-type": "json",
+        "format": "",
+        "exec": "~/.config/sway/scripts/conservation_mode check",
+        "on-click": "~/.config/sway/scripts/conservation_mode toggle; pkill -RTMIN+6 waybar",
+        "signal": 6
     }
 }
